@@ -1,0 +1,58 @@
+<div class="nav">
+  <ul>
+    <li><a (click)="clickOnNavbar()" [routerLink]="['/']">All theatres</a></li>
+    <div *ngIf="theatrePageWrapper">
+      <div *ngFor="let theatre of theatrePageWrapper.theatres">
+        <li><a (click)="clickOnNavbar()" [routerLink]="['theatre', theatre.id]">{{theatre.name}} </a></li>
+      </div>
+    </div>
+    <li id="showPopup"><a (click)="clickOnNavbar()" href="#popup1">Add Show</a></li>
+  </ul>
+  <div *ngIf="theatrePageWrapper">    
+    <div id="popup1" class="overlay">
+          
+      <div class="popup">
+        <h2>Add Show</h2>
+        <a class="close" href="">&times;</a>
+        <div class="content">
+          <div>
+            <form mehtod="post" action="/">
+              
+              <select name="movie">
+              
+              <option [value]="movie.id" *ngFor="let movie of getWrapper() | valueExtractor" >
+                {{movie.name}}
+              </option>
+              
+              
+
+              </select>
+              
+              <br />
+
+              <select name="theatre">
+              
+              
+                <option [value]="theatre.id" *ngFor="let theatre of theatrePageWrapper.theatres">
+                  {{theatre.name}}
+                </option>
+              
+
+              </select>
+
+              <br />
+              <input type="datetime-local" placeholder="Start date" name="starttime" required>
+              <br />
+              <input type="datetime-local" placeholder="End date" name="endtime" required>
+              <br />
+              <input type="submit" value="Submit">
+            </form>
+            <div *ngIf="success == false">
+              <p style="color: white; font-size: 14pt;">Could not add show</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

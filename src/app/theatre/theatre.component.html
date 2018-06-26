@@ -1,0 +1,25 @@
+<div *ngIf="theatrePageWrapper">
+  <div *ngFor="let show of theatrePageWrapper.shows; let i = index">
+    <div class="movie">
+      <div class="poster">
+        <img src="/assets/images/{{theatrePageWrapper.movieMap[show.movieId].name}}.jpg" />
+      </div>
+      <div class="labelText">
+        <div class="label">{{theatrePageWrapper.movieMap[show.movieId].name}}</div>
+        <div class="text">{{theatrePageWrapper.movieMap[show.movieId].description}}</div>
+        <br />
+        <div class="text">{{show.start}}-{{show.end}}</div>
+      </div>
+      <div class="book">
+        <form type="seats" method="get" action="/booking/{{show.id}}"
+          id="booking-form{{show.id}}">
+        </form>
+        <button type="submit">Book</button>
+        <div class="text">Available seats:
+          {{(theatrePageWrapper.theatres[0].seat_ROWS * theatrePageWrapper.theatres[0].seat_COLS)-theatrePageWrapper.totalSeatsTaken[i]/theatrePageWrapper.theatres[0].seat_ROWS * theatrePageWrapper.theatres[0].seat_COLS}}</div>
+        <div class="text">Price: 120kr</div>
+      </div>
+    </div>
+  </div>
+</div>
+

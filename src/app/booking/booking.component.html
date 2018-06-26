@@ -1,0 +1,108 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<title>Biograf AB</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+</head>
+<body>
+	<!-- <div class="header">
+		<h1>Biograf AB</h1>
+	</div>
+	<div class="container">
+		<div class="nav">
+			<ul>
+				<li><a href="/">All theatres</a></li>
+				<c:forEach items="${theatres}" var="theatre">
+					<li><a href="/theatre/${theatre.id}">${theatre.name}</a></li>
+				</c:forEach>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="movie">
+				<div class="poster">
+					<img src="/resources/img/${movie.name}.jpg" />
+				</div>
+				<div class="labelText">
+					<div class="label">${movie.name}</div>
+					<div class="text">${movie.description}</div>
+					<br />
+					<div class="text">${show.start}-${show.end}</div>
+					<br />
+
+					<div class="label">Book ticket</div>
+
+					<div class="booking-row">
+						<div class="booking-col">
+							<div class="checkSeatsTogether"> <input type="checkbox" id="seatsTogheter" />Seats together</div>
+							<button class="modifyNumSeats" onclick="increase()">+</button>
+							<div id="numberOfSeats">1</div>
+							<button class="modifyNumSeats" onclick="decrease()">-</button>
+						</div>
+						<div class="booking-col">
+							<div id="seatList">
+								---------Cinema screen---------
+								<c:forEach var="i" begin="0"
+									end="${theatres[0].getSEAT_ROWS()-1}">
+									<div class="row">
+										<c:forEach var="j" begin="0"
+											end="${theatres[0].getSEAT_COLS()-1}">
+											<c:set var="key" value="row${i}col${j}" />
+											<c:choose>
+												<c:when test="${not empty tickets[key]}">
+													<input disabled id="disabled" type="checkbox" class="seat"
+														value="${i}${j}" />
+												</c:when>
+												<c:otherwise>
+													<input type="checkbox" class="seat" name="bookedSeats"
+														value="${i}${j}" />
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</div>
+								</c:forEach>
+							</div>
+						</div>
+						<div class="booking-col">
+							Customer information
+							<form:form mehtod="post" id="submitForm" action="/booking/${show.id}">
+								<input id="seats" name="seats" type="hidden">
+								<input type="text" placeholder="First name"> -->
+								<!-- <br />
+								<input type="text" placeholder="Last name">
+								<br />
+								<input type="text" placeholder="E-mail">
+ 								<br />
+
+								<button id="submitButton" type="button" onclick="canMakeBooking()">Submit</button>
+							</form:form>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div>Webmaster: Karl-Gustav, Emil, Anders</div>
+		<div>Copyright &copy; 2018 Biograf AB</div>
+		<div
+			style="margin-top: 10px; margin-bottom: 5px; border-bottom: 1px solid white;">Contact
+			information</div>
+		<div style="padding-right: 5px;">
+			Email: <a style="color: white;" href="mailto:info@me.com">info@me.com</a>
+		</div>
+		<div style="padding-right: 5px;">
+			Phone: <a style="color: white;" href="tel:0701234567">070-123 45
+				67</a>
+		</div>
+	</div> -->
+</body>
+</html>
