@@ -15,7 +15,7 @@ export class TheatreComponent implements OnInit {
 
   ngOnInit() {
 
-    this.cinemaService.currentMessage.subscribe(data=>{
+    this.cinemaService.theatreWrapperObservable.subscribe(data=>{
 
       this.theatrePageWrapper=data;
     });

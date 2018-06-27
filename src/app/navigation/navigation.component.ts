@@ -21,7 +21,7 @@ export class NavigationComponent implements OnInit {
 
   clickOnNavbar(){
     this.cinemaService.getTheatrepageWrapper();
-    this.cinemaService.currentMessage.subscribe(data=>{
+    this.cinemaService.theatreWrapperObservable.subscribe(data=>{
       
       this.theatrePageWrapper=data;
     

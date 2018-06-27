@@ -1,66 +1,62 @@
-<p>Hej bokningssida</p>
+<div *ngIf="bookingpageWrapper">
+	<div class="movie">
+		<div class="poster">
+			<img src="/assets/images/{{bookingpageWrapper.movie.name}}.jpg" />
+		</div>
+		<div class="labelText">
+			<div class="label">{{bookingpageWrapper.movie.name}}</div>
+			<div class="text">{{bookingpageWrapper.movie.description}}</div>
+			<br />
+			<div class="text">{{bookingpageWrapper.show.start}}-{{bookingpageWrapper.show.end}}</div>
+			<br />
 
-<div class="movie">
-	<div class="poster">
-		<img src="/resources/img/${movie.name}.jpg" />
-	</div>
-	<div class="labelText">
-		<div class="label">${movie.name}</div>
-		<div class="text">${movie.description}</div>
-		<br />
-		<div class="text">${show.start}-${show.end}</div>
-		<br />
+			<div class="label">Book ticket</div>
 
-		<div class="label">Book ticket</div>
-
-		<div class="booking-row">
-			<div class="booking-col">
-				<div class="checkSeatsTogether"> <input type="checkbox" id="seatsTogheter" />Seats together</div>
-				<button class="modifyNumSeats" onclick="increase()">+</button>
-				<div id="numberOfSeats">1</div>
-				<button class="modifyNumSeats" onclick="decrease()">-</button>
-			</div>
-			<div class="booking-col">
-				<div id="seatList">
-					---------Cinema screen---------
-					<div *ngFor="let theatre of theatrePageWrapper.theatres">
-					<div *ngFor= "let let theatre of theatrePageWrapper.theatres>
-						end="${theatres[0].getSEAT_ROWS()-1}">
-						<div class="row">
-							<c:forEach var="j" begin="0"
-								end="${theatres[0].getSEAT_COLS()-1}">
-								<c:set var="key" value="row${i}col${j}" />
-								<c:choose>
-									<c:when test="${not empty tickets[key]}">
-										<input disabled id="disabled" type="checkbox" class="seat"
-											value="${i}${j}" />
-									</c:when>
-									<c:otherwise>
-										<input type="checkbox" class="seat" name="bookedSeats"
-											value="${i}${j}" />
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-						</div>
-					</c:forEach>
+			<div class="booking-row">
+				<div class="booking-col">
+					<div class="checkSeatsTogether"> <input (click)="resetBooking()" type="checkbox" id="seatsTogheter" />Seats together</div>
+					<button class="modifyNumSeats" (click)="increase()">+</button>
+					<div id="numberOfSeats">1</div>
+					<button class="modifyNumSeats" (click)="decrease()">-</button>
 				</div>
-			</div>
-			<div class="booking-col">
-				Customer information
-				<form:form mehtod="post" id="submitForm" action="/booking/${show.id}">
-					<input id="seats" name="seats" type="hidden">
-					<input type="text" placeholder="First name">
-					<br />
-					<input type="text" placeholder="Last name">
-					<br />
-					<input type="text" placeholder="E-mail">
-					<br />
+				
+				<div class="booking-col">
+					<div id="seatList">
+						---------Cinema screen---------
+						
+						<div *ngFor="let i of getArray(bookingpageWrapper.theatres[0].seat_ROWS)">
+							<div class="row">
+								<div *ngFor="let j of getArray(bookingpageWrapper.theatres[0].seat_COLS)">
+									<div *ngIf="bookingpageWrapper.ticketMap[getMapKey(i, j)]; else elseBlock">
+										<input (click)="clickSeat(i, j)"  disabled id="disabled" type="checkbox" class="seat"
+										value="{{i+''+j}}" />
+									</div>
+									<ng-template #elseBlock>
+										<input (click)="clickSeat(i, j)" type="checkbox" class="seat" name="bookedSeats"
+										value="{{i+''+j}}" />
+									</ng-template>
+								</div>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+				<div class="booking-col">
+					<!-- Customer information
+					<form enctype='application/json' method="post" id="submitForm" action="http://localhost:8090/booking/{{bookingpageWrapper.show.id}}">
+						<input id="seats" name="seats" type="hidden">
+						<input type="text" placeholder="First name">
+						<br />
+						<input type="text" placeholder="Last name">
+						<br />
+						<input type="text" placeholder="E-mail">
+						<br /> -->
 
-					<button id="submitButton" type="button" onclick="canMakeBooking()">Submit</button>
-				</form:form>
+						<button id="submitButton" type="button" (click)="canMakeBooking()">Submit</button>
+					 <!-- </form> -->
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
 	

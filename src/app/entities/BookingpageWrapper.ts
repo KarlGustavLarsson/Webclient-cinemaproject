@@ -8,6 +8,6 @@ export class BookingpageWrapper {
     theatres:Theatre [];
     show:Show;
     movie:Movie;
-    ticketMap:Map <string, Ticket>;
+    ticketMap:{ [name: string]: Ticket };
 
 }

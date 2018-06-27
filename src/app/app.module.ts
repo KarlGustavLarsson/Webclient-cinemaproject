@@ -9,6 +9,7 @@ import { TheatreComponent } from './theatre/theatre.component';
 import { RouterModule,Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ValueExtractorPipe } from './value-extractor.pipe';
+import { SeatComponent } from './seat/seat.component';
 const appRoutes:Routes=[{path:'', component:TheatreComponent},{path:'booking/:id', component:BookingComponent},
 {path:'theatre/:id', component:TheatreComponent}, ];
 @NgModule({
@@ -17,7 +18,8 @@ const appRoutes:Routes=[{path:'', component:TheatreComponent},{path:'booking/:id
     BookingComponent,
     NavigationComponent,
     TheatreComponent,
-    ValueExtractorPipe
+    ValueExtractorPipe,
+    SeatComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, RouterModule.forRoot (appRoutes) 

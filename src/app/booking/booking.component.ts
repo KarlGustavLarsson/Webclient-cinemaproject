@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import { CinemaService } from '../cinema.service';
+import { BookingpageWrapper } from '../entities/BookingpageWrapper';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-booking',
@@ -7,32 +10,53 @@ import * as $ from 'jquery';
   styleUrls: ['./booking.component.css']
 })
 export class BookingComponent implements OnInit {
-  
-  constructor() {	$(document).ready(
-			
-    function() {
-      $("input.seat").click(
-          function() {
-            this.clickSeat(parseInt($(this).parent().index()),
-                parseInt($(this).index()));
-          });
-      
-      $('#seatsTogheter').click(function(){
-        this.resetBooking();
-      });		
-      this.numberOfSeats = parseInt($('#numberOfSeats').text());
-    });
-}
-
-  ngOnInit() {
-
-
-  }
-  
-  seats = [];
+	
+	bookingpageWrapper: BookingpageWrapper;
+	seats = [];
 	seatsTogheter;
 	numberOfSeats;
 	seatArr = [];
+
+  constructor(private cinemaService:CinemaService, private route: ActivatedRoute) {	
+		
+}
+
+  ngOnInit() {
+		const id = +this.route.snapshot.paramMap.get('id');
+		this.cinemaService.getBookingpageWrapper(id);
+		this.cinemaService.bookingWrapperObservable
+						.subscribe(data => this.bookingpageWrapper = data,
+											 error => console.log(error));
+		
+	}
+	
+	ngAfterViewInit(){
+		// $(document).ready(	
+		// 	function() {
+			
+				
+				// $('#seatsTogheter').click(function(){
+				// 	this.self.resetBooking();
+				// });		
+		this.numberOfSeats = parseInt($('#numberOfSeats').text());
+	// 		});
+	}
+
+	getMapKey(row: number, col: number){
+		
+		return "row"+row+"col"+col;
+		
+		
+	}
+  getArray(max: number) {
+		let arr = [];
+
+    for (let i = 0; i < max; i++) {
+      arr[i]=i;
+    }
+    return arr;
+  }
+  
 	increase() {
 
 	  var el = parseInt($('#numberOfSeats').text());
@@ -47,25 +71,25 @@ export class BookingComponent implements OnInit {
 	  $('#numberOfSeats').text(el-1); 
     this.numberOfSeats =el-1;
 	 }
-
 	}
 
 	clickSeat(row, col) {
+
 		this.seatsTogheter = $('#seatsTogheter:checked').val();
 		
 		if(this.seatsTogheter){
 			
 			
 			this.seats = [];
-			$("#seats").val(this.seats);
+			$("#seats").val(JSON.stringify(this.seats));
 
 			$("#seatList").find("input").prop("checked", false);
 			//Check if number of seats are within bounds
 			if(($('.row').first().children().length >= (col+this.numberOfSeats))){
 				
 					
-				
-				$("#seatList").find('[value=' + this.seatArr.join('], [value=') + ']').prop("checked", false);
+				let seatString = '[value=' + this.seatArr.join('], [value=') + ']';
+				$("#seatList.input").find(seatString).prop("checked", false);
 				var nextCol;
 				var nextRow;
 				this.seatArr = [];
@@ -83,7 +107,7 @@ export class BookingComponent implements OnInit {
 							}).length;
 				
 				if(disabled === 0){
-					$("#seats").val(this.seats);
+					$("#seats").val(JSON.stringify(this.seats));
 					$("#seatList").find('[value=' + this.seatArr.join('], [value=') + ']').prop("checked", true);
 				}
 
@@ -91,7 +115,7 @@ export class BookingComponent implements OnInit {
 			}
 		} else {
 			this.seats.push([ row, col ]);
-			$("#seats").val(this.seats);
+			$("#seats").val(JSON.stringify(this.seats));
 		}
 		
 	}
@@ -106,8 +130,14 @@ export class BookingComponent implements OnInit {
 			alert("Can't book 0 seats");
 			return;
 		}
-		
-		//document.getElementById("submitForm").submit();
+		let arr = [];
+    for(let i = 0; i < this.seats.length; i++){
+			arr.push(this.seats[i]);
+    }
+		console.log("sending booking "+this.seats);
+		const id = +this.route.snapshot.paramMap.get('id');
+		this.cinemaService.makeBooking(id, arr);
+		// (<HTMLFormElement>document.getElementById("submitForm")).submit();
 	}
 	
 
