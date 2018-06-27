@@ -2,11 +2,11 @@ import { Theatre } from "./Theatre";
 import { Show } from "./Show";
 import { Movie } from "./Movie";
 
-export class TheatrepageWrapper {
+export interface TheatrepageWrapper {
 
     theatres:Theatre[];
     shows:Show[];
-    movieMap:Map<number, Movie>;
+    movieMap:{ [id: number]: Movie };
     totalSeatsTaken:number[];
 
 }

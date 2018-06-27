@@ -11,10 +11,11 @@
         <div class="text">{{show.start}}-{{show.end}}</div>
       </div>
       <div class="book">
-        <form type="seats" method="get" action="/booking/{{show.id}}"
+        <form type="seats" method="get" (submit)="onSubmit(show.id)"
           id="booking-form{{show.id}}">
+          <button type="submit">Book</button>
         </form>
-        <button type="submit">Book</button>
+        
         <div class="text">Available seats:
           {{(theatrePageWrapper.theatres[0].seat_ROWS * theatrePageWrapper.theatres[0].seat_COLS)-theatrePageWrapper.totalSeatsTaken[i]/theatrePageWrapper.theatres[0].seat_ROWS * theatrePageWrapper.theatres[0].seat_COLS}}</div>
         <div class="text">Price: 120kr</div>

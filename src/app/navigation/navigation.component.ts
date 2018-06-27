@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CinemaService } from '../cinema.service';
 import { TheatrepageWrapper } from '../entities/TheatrepageWrapper';
+import { Movie } from '../entities/Movie';
+import { Booking } from '../entities/Booking';
 
 @Component({
   selector: 'app-navigation',
@@ -15,11 +17,6 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     this.clickOnNavbar();
-    // this.cinemaService.currentMessage.subscribe(data=>{
-      
-    //     this.theatrePageWrapper=data;
-      
-    // });
   }
 
   clickOnNavbar(){
@@ -29,17 +26,12 @@ export class NavigationComponent implements OnInit {
       this.theatrePageWrapper=data;
     
   });
-  // this.cinemaService.getTheatrepageWrapper().subscribe(data=>{
-    
+  // this.cinemaService.getTheatrepageWrapper().subscribe( data =>{
   //   this.theatrePageWrapper=data;
-  //   console.log(this.theatrePageWrapper.theatres);
-  // });
+  //   });
   }
 
-  getWrapper(){
-    if(this.theatrePageWrapper == null){
-      this.clickOnNavbar();
-    }
-    return this.theatrePageWrapper.movieMap;
+  getValues(){
+    return Object.values(this.theatrePageWrapper.movieMap);
   }
 }

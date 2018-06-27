@@ -17,17 +17,17 @@
         <div class="content">
           <div>
             <form mehtod="post" action="/">
-              
-              <select name="movie">
-              
-              <option [value]="movie.id" *ngFor="let movie of getWrapper() | valueExtractor" >
-                {{movie.name}}
-              </option>
-              
-              
+              <!-- <div *ngIf="theatrePageWrapper.movieMap"> -->
+                <select name="movie">
+                
+                <option [value]="movie.id" *ngFor="let movie of getValues(theatrePageWrapper.movieMap); let i = index" >
+                  {{movie.name}}
+                </option>
+                
+                
 
-              </select>
-              
+                </select>
+              <!-- </div> -->
               <br />
 
               <select name="theatre">

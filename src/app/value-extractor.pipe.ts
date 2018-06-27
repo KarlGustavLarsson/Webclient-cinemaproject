@@ -7,12 +7,13 @@ import { Movie } from './entities/Movie';
 export class ValueExtractorPipe implements PipeTransform {
 
   transform(map: Map<number, Movie>): Movie[] {
-    let ret = [];
-
-    map.forEach(function(value, key, map){
-      ret.push(value);
-    });
-
+    let ret: Movie[] = [];
+    // if(!map){
+      map.forEach((value, key) =>
+        ret.push(value)
+      );
+    // }
+  
     return ret;
   }
  
