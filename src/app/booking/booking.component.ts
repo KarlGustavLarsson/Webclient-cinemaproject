@@ -79,9 +79,7 @@ export class BookingComponent implements OnInit {
 		
 		if(this.seatsTogheter){
 			
-			
 			this.seats = [];
-			$("#seats").val(JSON.stringify(this.seats));
 
 			$("#seatList").find("input").prop("checked", false);
 			//Check if number of seats are within bounds
@@ -107,19 +105,37 @@ export class BookingComponent implements OnInit {
 							}).length;
 				
 				if(disabled === 0){
-					$("#seats").val(JSON.stringify(this.seats));
+					
 					$("#seatList").find('[value=' + this.seatArr.join('], [value=') + ']').prop("checked", true);
 				}
 
 
 			}
 		} else {
-			this.seats.push([ row, col ]);
-			$("#seats").val(JSON.stringify(this.seats));
+			this.toggleSeat(row, col);
+			
+			
 		}
 		
 	}
+	toggleSeat(row, col){
+		let i = 0;
+		let remove = false;
+		for(i = 0; i < this.seats.length; i++){
+			let currentRow = this.seats[i][0];
+			let currentCol = this.seats[i][1];
+			if(currentRow == row && currentCol == col){
+				remove = true;
+				break;
+			}
+		}
+		if(remove){
+			this.seats.splice(i,1);
+		} else {
+			this.seats.push([ row, col ]);
+		}
 
+	}
 	resetBooking(){
 		$("#seatList").find("[type=checkbox]").prop("checked", false);
 		this.seats = [];

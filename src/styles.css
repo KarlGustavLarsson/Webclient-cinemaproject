@@ -33,6 +33,7 @@ body {
 }
 
 .nav ul{
+
     list-style-type: none;  
     padding: 10px;
     border-radius: 15px;
@@ -152,6 +153,7 @@ input[type="checkbox"]:checked:after {
 
 .nav li {
     float: left;
+    
 }
 
 .nav li a{
@@ -168,7 +170,11 @@ input[type="checkbox"]:checked:after {
     overflow: hidden;
 }
 
-
+.navLoop {
+    display:flex;
+    flex-direction: row;
+    
+}
 
 .main {
     display: flex;
@@ -324,14 +330,13 @@ input[type=submit]:hover {
 	color: black !important;
 	width: 20%;
 	position: relative;
-	transition: all 2s ease-in-out;
+	transition: all 0.5s ease-in-out;
 	background-color: darkred;
 }
 .popup .close {
 	position: absolute;
 	top: 20px;
-	right: 30px;
-	
+    right: 30px;
 	font-size: 30px;
 	font-weight: bold;
 	text-decoration: none;

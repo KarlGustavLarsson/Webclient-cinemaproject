@@ -11,10 +11,10 @@ export class TheatreComponent implements OnInit {
 
   theatrePageWrapper:TheatrepageWrapper;
 
-  constructor(public cinemaService:CinemaService, private router: Router) { }
+  constructor(public cinemaService:CinemaService, public router: Router) { }
 
   ngOnInit() {
-
+    this.cinemaService.getTheatrepageWrapper();
     this.cinemaService.theatreWrapperObservable.subscribe(data=>{
 
       this.theatrePageWrapper=data;

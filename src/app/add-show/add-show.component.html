@@ -1,0 +1,43 @@
+<div *ngIf="theatrePageWrapper">    
+  <div id="popup1" class="overlay">
+        
+    <div class="popup">
+      <h2>Add Show</h2>
+      <a (click)="resetErrorMsg()" class="close" href="#">&times;</a>
+      <div class="content">
+        <div>
+          <form method="POST" (submit)="addShow()">
+            <!-- <div *ngIf="theatrePageWrapper.movieMap"> -->
+              <select required [(ngModel)]="movieId" name="movie">
+              
+              <option required [ngValue]="movie.id" *ngFor="let movie of getValues(theatrePageWrapper.movieMap); let i = index" >
+                {{movie.name}}
+              </option>
+              
+              </select>
+              <!-- </div> -->
+              <br />
+
+               <select required [(ngModel)]="theatreId" name="theatre">
+
+              <option [ngValue]="theatre.id" *ngFor="let theatre of theatrePageWrapper.theatres">
+                {{theatre.name}}
+              </option>
+
+            </select>
+
+            <br />
+            <input [(ngModel)]="starttime" type="datetime-local" placeholder="Start date" name="starttime" required>
+            <br />
+            <input [(ngModel)]="endtime" type="datetime-local" placeholder="End date" name="endtime" required>
+            <br />
+            <input type="submit" value="Submit">
+           </form>
+            <div *ngIf="errorMsg != ''">
+              <p>Could not add show</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
