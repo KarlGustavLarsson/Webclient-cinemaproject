@@ -46,7 +46,7 @@ body {
 }
 
 #showPopup a:hover {
-
+    cursor: pointer;
 	background-color: red !important;
 }
 
@@ -313,16 +313,16 @@ input[type=submit]:hover {
     left: 0;
     right: 0;
     transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
-
+    visibility: visible;
+    opacity: 1;
+    
 }
 
-.overlay:target {
+/* .overlay:target {
 	visibility: visible;
 	opacity: 1;
 
-}
+} */
 .popup {
 	margin: 70px auto;
 	padding: 20px;
@@ -340,7 +340,7 @@ input[type=submit]:hover {
 	font-size: 30px;
 	font-weight: bold;
 	text-decoration: none;
-	
+	cursor: pointer;
 	color: #333;
 }
 

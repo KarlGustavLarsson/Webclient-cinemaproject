@@ -1,9 +1,9 @@
 <div *ngIf="theatrePageWrapper">    
-  <div id="popup1" class="overlay">
+  <div *ngIf="showModal" id="popup1" class="overlay">
         
     <div class="popup">
       <h2>Add Show</h2>
-      <a (click)="resetErrorMsg()" class="close" href="#">&times;</a>
+      <a (click)="closeModal()" class="close" >&times;</a>
       <div class="content">
         <div>
           <form method="POST" (submit)="addShow()">

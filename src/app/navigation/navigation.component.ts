@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CinemaService } from '../cinema.service';
 import { TheatrepageWrapper } from '../entities/TheatrepageWrapper';
-import { Movie } from '../entities/Movie';
-import { Booking } from '../entities/Booking';
+
+
 
 @Component({
   selector: 'app-navigation',
@@ -13,6 +13,8 @@ export class NavigationComponent implements OnInit {
 
   theatrePageWrapper:TheatrepageWrapper;
   success: boolean;
+  modalShown = false;
+
   constructor(public cinemaService:CinemaService) { }
 
   ngOnInit() {
@@ -29,6 +31,15 @@ export class NavigationComponent implements OnInit {
   // this.cinemaService.getTheatrepageWrapper().subscribe( data =>{
   //   this.theatrePageWrapper=data;
   //   });
+  }
+
+  clickOnPopup(){
+    this.clickOnNavbar();
+    this.togglePopup();
+  }
+
+  togglePopup(){
+    this.modalShown = !this.modalShown;
   }
 
   getValues(){

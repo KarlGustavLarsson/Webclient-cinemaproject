@@ -6,7 +6,7 @@
         <li *ngFor="let theatre of theatrePageWrapper.theatres">
          <a (click)="clickOnNavbar()" [routerLink]="['theatre', theatre.id]">{{theatre.name}} </a>
         </li>
-    <li id="showPopup"><a (click)="clickOnNavbar()" href="#popup1">Add Show</a></li>
+    <li id="showPopup"><a (click)="clickOnPopup()" >Add Show</a></li>
   </ul>
-<app-add-show></app-add-show>
+<app-add-show (closeEvent)="togglePopup()" [showModal]='modalShown'></app-add-show>
 </div>
