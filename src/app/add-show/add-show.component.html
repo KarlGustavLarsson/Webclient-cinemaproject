@@ -33,8 +33,11 @@
             <br />
             <input type="submit" value="Submit">
            </form>
-            <div *ngIf="errorMsg != ''">
-              <p>Could not add show</p>
+          <div *ngIf="errorMsg != ''">
+            <p>Could not add show</p>
+          </div>
+          <div *ngIf="successMsg != ''">
+            <p>Show was added</p>
           </div>
         </div>
       </div>

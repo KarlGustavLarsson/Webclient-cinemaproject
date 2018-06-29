@@ -16,18 +16,23 @@ export class AddShowComponent extends NavigationComponent {
   theatreId:number;
   movieId:number;
   errorMsg: string = '';
+  successMsg: string = '';
   addShow() {
     this.resetErrorMsg();
+    this.resetSuccessMsg();
     console.log(this.starttime + " " + this.endtime + " " + this.theatreId + " " + this.movieId);
     let show = new Show();
     show.start = this.starttime;
     show.end = this.endtime;
     show.theatreId = this.theatreId;
     show.movieId = this.movieId;
-    this.cinemaService.addShow(show).subscribe(data => data, error => this.errorMsg = error);
+    this.cinemaService.addShow(show).subscribe(data => this.successMsg="success", error => this.errorMsg = error);
   }
 
   resetErrorMsg(){
     this.errorMsg='';
+  }
+  resetSuccessMsg(){
+    this.successMsg='';
   }
 }
