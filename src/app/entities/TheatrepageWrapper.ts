@@ -6,7 +6,8 @@ export interface TheatrepageWrapper {
 
     theatres:Theatre[];
     shows:Show[];
-    movieMap:{ [id: number]: Movie };
-    totalSeatsTaken:number[];
+    movies:Movie[];
+    movieMap: Map<number, Movie>;
+    totalSeatsTaken:{[id: number]: number};
 
 }

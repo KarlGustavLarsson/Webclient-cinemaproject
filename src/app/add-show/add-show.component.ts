@@ -24,7 +24,6 @@ export class AddShowComponent extends NavigationComponent {
   addShow() {
     this.resetErrorMsg();
     this.resetSuccessMsg();
-    console.log(this.starttime + " " + this.endtime + " " + this.theatreId + " " + this.movieId);
     let show = new Show();
     show.start = this.starttime;
     show.end = this.endtime;

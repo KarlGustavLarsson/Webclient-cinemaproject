@@ -6,19 +6,19 @@
       <a (click)="closeModal()" class="close" >&times;</a>
       <div class="content">
         <div>
-          <form method="POST" (submit)="addShow()">
-            <!-- <div *ngIf="theatrePageWrapper.movieMap"> -->
-              <select required [(ngModel)]="movieId" name="movie">
-              
-              <option required [ngValue]="movie.id" *ngFor="let movie of getValues(theatrePageWrapper.movieMap); let i = index" >
+          <!-- <form (submit)="addShow()"> -->
+
+            <select required [(ngModel)]="movieId" name="movie">
+            
+              <option required [ngValue]="movie.id" *ngFor="let movie of theatrePageWrapper.movies; let i = index" >
                 {{movie.name}}
               </option>
-              
-              </select>
-              <!-- </div> -->
-              <br />
+            
+            </select>
 
-               <select required [(ngModel)]="theatreId" name="theatre">
+            <br />
+
+            <select required [(ngModel)]="theatreId" name="theatre">
 
               <option [ngValue]="theatre.id" *ngFor="let theatre of theatrePageWrapper.theatres">
                 {{theatre.name}}
@@ -31,8 +31,8 @@
             <br />
             <input [(ngModel)]="endtime" type="datetime-local" placeholder="End date" name="endtime" required>
             <br />
-            <input type="submit" value="Submit">
-           </form>
+            <input type="submit" value="Submit"(click)="addShow()">
+           <!-- </form> -->
           <div *ngIf="errorMsg != ''">
             <p>Could not add show</p>
           </div>

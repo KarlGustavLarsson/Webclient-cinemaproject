@@ -9,9 +9,9 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { TheatreComponent } from './theatre/theatre.component';
 import { RouterModule,Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { ValueExtractorPipe } from './value-extractor.pipe';
 import { AddShowComponent } from './add-show/add-show.component';
 import { SpecificTheatreComponent } from './specific-theatre/specific-theatre.component';
+import { SearchPipe } from './search.pipe';
 const appRoutes:Routes=[{path:'', component:TheatreComponent},{path:'booking/:id', component:BookingComponent},
 {path:'theatre/:id', component:SpecificTheatreComponent}, ];
 @NgModule({
@@ -20,9 +20,9 @@ const appRoutes:Routes=[{path:'', component:TheatreComponent},{path:'booking/:id
     BookingComponent,
     NavigationComponent,
     TheatreComponent,
-    ValueExtractorPipe,
     AddShowComponent,
-    SpecificTheatreComponent
+    SpecificTheatreComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule, HttpClientModule, RouterModule.forRoot (appRoutes) , FormsModule

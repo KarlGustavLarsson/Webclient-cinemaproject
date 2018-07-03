@@ -1,12 +1,15 @@
+<div>
+  Filter: <input type="text" [(ngModel)]="searchString"> 
+</div>
 <div *ngIf="theatrePageWrapper">
-  <div *ngFor="let show of theatrePageWrapper.shows; let i = index">
+  <div *ngFor="let show of theatrePageWrapper.shows | search:theatrePageWrapper:searchString:searchProperties">
     <div class="movie">
       <div class="poster">
-        <img src="/assets/images/{{theatrePageWrapper.movieMap[show.movieId].name}}.jpg" />
+        <img src="/assets/images/{{theatrePageWrapper.movieMap.get(show.movieId).name}}.jpg" />
       </div>
       <div class="labelText">
-        <div class="label">{{theatrePageWrapper.movieMap[show.movieId].name}}</div>
-        <div class="text">{{theatrePageWrapper.movieMap[show.movieId].description}}</div>
+        <div class="label">{{theatrePageWrapper.movieMap.get(show.movieId).name}}</div>
+        <div class="text">{{theatrePageWrapper.movieMap.get(show.movieId).description}}</div>
         <br />
         <div class="text">{{show.start}}-{{show.end}}</div>
       </div>
@@ -17,7 +20,7 @@
         </form>
         
         <div class="text">Available seats:
-          {{(theatrePageWrapper.theatres[0].seat_ROWS * theatrePageWrapper.theatres[0].seat_COLS) - theatrePageWrapper.totalSeatsTaken[i]}}</div>
+          {{(theatrePageWrapper.theatres[0].seat_ROWS * theatrePageWrapper.theatres[0].seat_COLS) - theatrePageWrapper.totalSeatsTaken[show.id]}}</div>
         <div class="text">Price: 120kr</div>
       </div>
     </div>

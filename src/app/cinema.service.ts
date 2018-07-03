@@ -4,6 +4,7 @@ import { TheatrepageWrapper } from './entities/TheatrepageWrapper';
 import { BehaviorSubject, Subscription, Observable } from 'rxjs';
 import { BookingpageWrapper } from './entities/BookingpageWrapper';
 import { Show } from './entities/Show';
+import { Movie } from './entities/Movie';
 
 
 @Injectable({
@@ -22,51 +23,50 @@ export class CinemaService {
 
   constructor(private http:HttpClient) { }
 
+
+  get<T>(url: string, subject: BehaviorSubject, modify?: (T) => T){
+    this.http.get<T>(url).subscribe(data => {
+      if(modify){
+        data = modify(data);
+      }
+      subject.next(data);
+    });
+  }
+
+  post<T>(url: string, payload: T, httpOptions) : Observable<T>{
+    return this.http.post<T>(url, JSON.stringify(payload), httpOptions);
+  }
+
+  modify(wrapper: TheatrepageWrapper){
+    let movieMap = new Map<number, Movie>();
+    wrapper.movies.forEach(item => movieMap.set(item.id, item));
+    wrapper.movieMap = movieMap;
+    return wrapper;
+  }
+
   getTheatrepageWrapper () {
     let url = 'http://localhost:8090';
-    this.http.get<TheatrepageWrapper>(url).subscribe(data =>{
-
-      this.theatreWrapper.next(data);
-    });
+    this.get<TheatrepageWrapper>(url, this.theatreWrapper, this.modify);
   }
 
   getSpecificTheatreWrapper (theatreId:number) {
     let url = 'http://localhost:8090/theatre/'+ theatreId;
-    this.http.get<TheatrepageWrapper>(url).subscribe(data =>{
-
-      this.specificTheatreWrapper.next(data);
-    });
+    this.get<TheatrepageWrapper>(url, this.specificTheatreWrapper, this.modify);
   }
 
-
-  getBookingpageWrapper (id:number) {
+  getBookingpageWrapper (id:number){
     let url = 'http://localhost:8090/booking/'+id;
-    this.http.get<BookingpageWrapper>(url).subscribe(data =>{
-      console.log(data);
-      this.bookingWrapper.next(data);
-    });
+    this.get<BookingpageWrapper>(url, this.bookingWrapper);
   }
-  // getTheatrepageWrapper () : Observable<TheatrepageWrapper>{
-  //   let url = 'http://localhost:8090';
-  //   return this.http.get<TheatrepageWrapper>(url);
-  // }
+
   makeBooking(id: number, seats: number[]){
-    console.log("making booking "+JSON.stringify(seats));
     let url = 'http://localhost:8090/booking/'+id;
-   
-    this.http.post<number[]>
-            (url, JSON.stringify(seats), { headers: new HttpHeaders({'Content-Type':'application/json'})})
-            .subscribe(data => data);
+    this.post<number[]>(url, seats, { headers: new HttpHeaders({'Content-Type':'application/json'})}).subscribe(data => data);
   }
 
-  addShow(show:Show) : Observable<Show>{
-    console.log("making booking "+JSON.stringify(show));
+  addShow(show: Show) : Observable<Show>{
     let url = 'http://localhost:8090';
-   
-    return this.http.post<Show>
-            (url, JSON.stringify(show ), { headers: new HttpHeaders({'Content-Type':'application/json'})})
-            ;
+    return this.post<Show>(url, show, { headers: new HttpHeaders({'Content-Type':'application/json'})});
   }
-  
 
 }

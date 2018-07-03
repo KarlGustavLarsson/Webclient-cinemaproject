@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CinemaService } from '../cinema.service';
 import { TheatrepageWrapper } from '../entities/TheatrepageWrapper';
 import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-theatre',
   templateUrl: './theatre.component.html',
@@ -10,7 +11,8 @@ import {Router} from '@angular/router';
 export class TheatreComponent implements OnInit {
 
   theatrePageWrapper:TheatrepageWrapper;
-
+  searchString: string = "";
+  searchProperties = ['name', 'description'];
   constructor(public cinemaService:CinemaService, public router: Router) { }
 
   ngOnInit() {
@@ -19,10 +21,7 @@ export class TheatreComponent implements OnInit {
 
       this.theatrePageWrapper=data;
     });
-    // this.cinemaService.getTheatrepageWrapper().subscribe(data=>{
 
-    //   this.theatrePageWrapper=data;
-    // });
   }
   onSubmit(id: number){
     console.log(id);
