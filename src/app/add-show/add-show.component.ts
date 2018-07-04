@@ -17,7 +17,7 @@ export class AddShowComponent extends NavigationComponent {
   movieId:number;
   errorMsg: string = '';
   successMsg: string = '';
-
+  
   @Input() showModal: boolean = false;
   @Output() closeEvent = new EventEmitter();
 
